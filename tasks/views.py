@@ -58,6 +58,12 @@ def taskEdit(request, id):
         state = request.POST.get('state')
         print(state)
         
-        task = Task(title=title, deadline=deadline, description=description, owner=User.objects.get(username=owner), supervisor=User.objects.get(username=supervisor), state=state)
+        task.title=title 
+        task.deadline=deadline 
+        task.description=description 
+        task.owner=User.objects.get(username=owner) 
+        task.supervisor=User.objects.get(username=supervisor)
+        task.state=state
         task.save()
+        return redirect(taskAssigned)
     return render(request, 'editTask.html', context)
