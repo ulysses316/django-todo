@@ -20,7 +20,7 @@ This is a web application built with Django that allows users to create and mana
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/django-task-manager.git
+git clone https://github.com/ulysses316/django-todo.git
 ```
 2. Create a virtual environment and activate it:
 ```bash
