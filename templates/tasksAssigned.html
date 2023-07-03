@@ -7,6 +7,40 @@
 {% block content %}
     {% include 'components/Navbar.html' %}
     <div class="uk-container uk-margin-top">
+
+        <div class="uk-inline uk-margin-bottom uk-card-default uk-padding-small uk-width-1-1">
+            <div class="uk-card">Filtrado</div>
+            <div uk-dropdown="animation: slide-top; animate-out: true; duration: 700" class="uk-width-1-1">
+                <ul class="uk-nav uk-dropdown-nav">
+                    <form class="uk-text-center" method="post">
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Estado de la tarea</label>
+                            <select class="uk-select" name="state">
+                                <option value="None" selected></option>
+                                <option value="pending">Pendiente</option>
+                                <option value="overdue">Atrasado</option>
+                                <option value="inProgress">En proceso</option>
+                                <option value="awaiting">Esperando revision</option>
+                                <option value="approved">Aprobada</option>
+                                <option value="rejected">Rechazada</option>
+                            </select>
+                        </div>   
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-stacked-text">Fecha de la tarea</label>
+                            <input class="uk-input" type="date" id="start" name="deadline">
+                        </div>
+                        <button 
+                        type="submit" 
+                        formmethod="get" 
+                        formaction="/task-assigned"  
+                        class="uk-button uk-button-primary">
+                            Filtrar
+                    </button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+        
         <div style="gap: 1em" class="uk-grid-small uk-child-width-expand@s" uk-grid>
             {% for task in task_assigned %}
                 <div class="uk-card uk-card-default uk-card-body">
