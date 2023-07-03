@@ -36,7 +36,6 @@ def taskAssigned(request):
         task_assigned = Task.objects.filter(state=state_filter)
     if (date_filter is not "" and date_filter is not None):
         task_assigned = Task.objects.filter(deadline=date_filter)
-    print(f"Este mero es: {date_filter}")
 
     context = {
         "task_assigned": task_assigned
