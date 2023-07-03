@@ -1,0 +1,23 @@
+{% load static %}
+
+<nav class="uk-navbar-container">
+    <div class="uk-container">
+        <div uk-navbar>
+
+            <div class="uk-navbar-left">
+
+                <ul class="uk-navbar-nav">
+                    {% if user.is_active %}
+                    <li class="uk-active"><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                    {% else %}
+                    <li class="uk-active"><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+                    <li class="uk-active"><a href="{% url 'signup' %}">Crear cuenta</a></li>
+                    {% endif %}
+                    <li class="uk-active"><a href="{% url 'taskAssigned' %}">Tareas asignadas</a></li>
+                    <li class="uk-active"><a href="{% url 'createTask' %}">Crear tarea</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>

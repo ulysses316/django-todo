@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+    <title>Iniciar sesion</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'components/Navbar.html' %}
+    <div style="height: calc(100dvh - 80px);">
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-height-1-1">
+            <form class="uk-text-center" method="post">{% csrf_token %}
+                <fieldset class="uk-fieldset">
+            
+                    <legend class="uk-legend">Iniciar sesión</legend>
+            
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Nombre de usuario</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-stacked-text" type="text" name="username">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Contraseña</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-stacked-text" type="password" name="password">
+                        </div>
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        formmethod="post" 
+                        formaction="/login"  
+                        class="uk-button uk-button-primary">
+                            Iniciar sesión
+                    </button>
+                </fieldset>
+            </form>
+        </div>    
+    </div>
+
+{% endblock %}

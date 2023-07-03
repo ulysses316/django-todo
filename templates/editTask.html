@@ -1,0 +1,80 @@
+{% extends 'base_template.html' %}
+{% load humanize %}
+
+{% block title %}
+    <title>Crear tarea</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'components/Navbar.html' %}
+    <div style="height: calc(100dvh - 80px);">
+        <div class="uk-flex uk-flex-center uk-flex-middle uk-height-1-1">
+            <form class="uk-text-center" method="post">{% csrf_token %}
+                <fieldset class="uk-fieldset">
+            
+                    <legend class="uk-legend">Editar tarea</legend>
+            
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Titulo</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-stacked-text" type="text" name="title" value="{{task.title}}">
+                        </div>
+                    </div>
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Descripcion</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" id="form-stacked-text" type="text" name="description">{{task.description}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Fecha limite</label>
+                        {% with fecha_str=task.deadline %}
+                            <input class="uk-input" type="date" id="start" name="deadline"
+                                value="{{ fecha_str|date:"Y-m-d" }}">
+                        {% endwith %}
+                    </div>
+
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Responsable</label>
+                        <select value="{{task.owner}}" class="uk-select" name="owner">
+                            {% for item in all_users %}
+                                <option value="{{item}}" {% if task.owner == item %}selected{% endif %}>{{item}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Supervisor</label>
+                        <select class="uk-select" name="supervisor">
+                            {% for item in all_users %}
+                                <option value="{{item}}" {% if task.supervisor == item %}selected{% endif %}>{{item}}</option>
+                                {% endfor %}
+                            </select>
+
+                    </div>
+                    
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Estado</label>
+                        <select value="{{task.state}}" class="uk-select" name="state">
+                            <option value="pending" {% if task.state == "pending" %}selected{% endif %}>Pendiente</option>
+                            <option value="overdue" {% if task.state == "overdue" %}selected{% endif %}>Atrasado</option>
+                            <option value="inProgress" {% if task.state == "inProgress" %}selected{% endif %}>En proceso</option>
+                            <option value="awaiting" {% if task.state == "awaiting" %}selected{% endif %}>Esperando revision</option>
+                            <option value="approved" {% if task.state == "approved" %}selected{% endif %}>Aprobada</option>
+                            <option value="rejected" {% if task.state == "rejected" %}selected{% endif %}>Rechazada</option>
+                        </select>
+                    </div>
+                    <button 
+                        type="submit" 
+                        formmethod="post" 
+                        formaction="/create-task"  
+                        class="uk-button uk-button-primary">
+                            Crear tarea
+                    </button>
+                </fieldset>
+            </form>
+        </div>    
+    </div>
+{% endblock %}
